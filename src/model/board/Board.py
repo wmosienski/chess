@@ -1,37 +1,30 @@
-import numpy as np
-
-from PieceFactory import create_pawn
+from src.model.pieces.PieceFactory import create_pawn
 
 
 class Board:
     def __init__(self):
         self.tiles = []
-        for y in range(8):
-            self.tiles.append([])
-            for x in range(8):
-                self.tiles[y].append(None)
-        self.current = ""
+        self.restart()
+
+    def restart(self):
+        self.clear()
+        self.setPieces()
 
     def get_piece(self, x, y):
         if x >= 0 and x < 8 and y >= 0 and y < 8:
             return self.tiles[x][y]
 
+    def clear(self):
+        self.tiles = []
+        for y in range(8):
+            self.tiles.append([])
+            for x in range(8):
+                self.tiles[y].append(None)
+
     def setPieces(self):
         for i in range(8):
             self.tiles[i][1] = create_pawn(i, 1, 1)
             self.tiles[i][6] = create_pawn(i, 6, -1)
-
-
-    def print(self):
-        for y in range(8):
-            output = ""
-            for x in range(8):
-                if self.tiles[x][7-y] is not None:
-                    output += str(self.tiles[x][7-y].id) + "  "
-                else:
-                    output += "_" + "  "
-
-            print(output)
 
     def get_all_moves(self, is_white):
         moves = []

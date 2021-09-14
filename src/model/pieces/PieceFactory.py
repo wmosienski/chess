@@ -1,5 +1,5 @@
-from Move import Move, Placement
-from Piece import Piece
+from src.model.moves.Move import Move, Placement
+from src.model.pieces.Piece import Piece
 
 
 def pawn_takes_req(board, piece, dx, dy):

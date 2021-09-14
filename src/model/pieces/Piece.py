@@ -1,6 +1,4 @@
-import numpy as np
-
-from utils import rem_dup
+from src.utils.utils import rem_dup
 
 
 class Piece:
