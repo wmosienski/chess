@@ -1,4 +1,4 @@
-from src.model.pieces.PieceFactory import create_pawn
+from src.model.pieces.PieceFactory import create_pawn, create_rook
 
 
 class Board:
@@ -25,6 +25,11 @@ class Board:
         for i in range(8):
             self.tiles[i][1] = create_pawn(i, 1, 1)
             self.tiles[i][6] = create_pawn(i, 6, -1)
+
+        self.tiles[0][0] = create_rook(0, 0, 1)
+        self.tiles[7][0] = create_rook(7, 0, 1)
+        self.tiles[0][7] = create_rook(0, 7, -1)
+        self.tiles[7][7] = create_rook(7, 7, -1)
 
     def get_all_moves(self, is_white):
         moves = []

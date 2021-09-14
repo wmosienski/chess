@@ -9,9 +9,12 @@ class Move:
     def get_possible_tiles(self, board, piece):
         tiles = []
         for x, y in self.placement.get_possible_tiles(piece.x, piece.y):
-            result = self.requirement_func(board, piece)
+            result = self.requirement_func(board, piece, x-piece.x, y-piece.y)
+            # print(result)
             if result:
                 tiles.append((x, y, result))
+            if result is not True:
+                break
 
         return tiles
 

@@ -14,6 +14,8 @@ class Game:
         board = self.model.board
         moves = board.get_all_moves(self.is_white)
         x, y, x2, y2, result = moves[random.randint(0, len(moves) - 1)]
+        print("making move: ")
+        print(x, y, x2, y2, result)
         board.move(x, y, x2, y2, result)
         self.is_white = not self.is_white
 
