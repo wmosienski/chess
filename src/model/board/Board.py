@@ -1,4 +1,4 @@
-from src.model.pieces.PieceFactory import create_pawn, create_rook
+from src.model.pieces.PieceFactory import create_pawn, create_rook, create_bishop
 
 
 class Board:
@@ -31,23 +31,32 @@ class Board:
         self.tiles[0][7] = create_rook(0, 7, -1)
         self.tiles[7][7] = create_rook(7, 7, -1)
 
+        self.tiles[2][0] = create_bishop(2, 0, 1)
+        self.tiles[2][7] = create_bishop(2, 7, -1)
+        self.tiles[5][0] = create_bishop(5, 0, 1)
+        self.tiles[5][7] = create_bishop(5, 7, -1)
+
     def get_all_moves(self, is_white):
         moves = []
         for y in range(8):
             for x in range(8):
                 if self.tiles[x][y] is not None and self.tiles[x][y].is_white == is_white:
                     new_moves = self.tiles[x][y].get_legal_tiles(self)
-                    for new_x, new_y, result in new_moves:
-                        moves.append((x, y, new_x, new_y, result))
+                    for new_x, new_y, result, move_id in new_moves:
+                        moves.append((x, y, new_x, new_y, result, move_id))
 
         return moves
 
-    def move(self, x, y, x2, y2, taken_piece):
+    def move(self, x, y, x2, y2, taken_piece, move_id):
         piece = self.get_piece(x, y)
         if piece:
+            # for y in range(8):
+            #     for x in range(8):
+            #         if self.tiles[x][y] is not None and self.tiles[x][y].is_white == piece.is_white:
+            #             self.tiles[x][y].has_just_moved = False
             if taken_piece is not True and taken_piece is not False:
                 self.tiles[taken_piece.x][taken_piece.y] = None
-            piece.move()
+            piece.move(move_id)
             self.tiles[x][y] = None
             self.tiles[x2][y2] = piece
             piece.x = x2

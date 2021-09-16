@@ -8,6 +8,7 @@ class Piece:
         else:
             self.is_white = False
         self.direction = direction
+        self.last_move_id = None
         self.id = id
         self.x = x
         self.y = y
@@ -25,6 +26,7 @@ class Piece:
 
         return rem_dup(tiles)
 
-    def move(self):
+    def move(self, move_id):
         self.has_moved = True
         self.has_just_moved = True
+        self.last_move_id = move_id

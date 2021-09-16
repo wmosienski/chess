@@ -12,7 +12,7 @@ class Move:
             result = self.requirement_func(board, piece, x-piece.x, y-piece.y)
             # print(result)
             if result:
-                tiles.append((x, y, result))
+                tiles.append((x, y, result, self.id))
             if result is not True:
                 break
 
